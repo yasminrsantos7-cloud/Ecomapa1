@@ -13,31 +13,13 @@ import { Router, RouterLink } from '@angular/router';
 export class Login {
   @Output() loginSucesso = new EventEmitter<void>();
 
-  menuAberto = false;
   email = '';
   senha = '';
   aceitouTermos = false;
   carregando = false;
   mensagemErro = '';
 
-  menuItens = [
-    { rotulo: 'Início', link: '/inicio' },
-    { rotulo: 'Guia', link: '/guia' },
-    { rotulo: 'Mapa', link: '/mapa' },
-    { rotulo: 'Login', link: '/login' }
-  ];
-
-  menuCabecalho: { rotulo: string; link: string }[] = [];
-
   constructor(private router: Router) {}
-
-  alternarMenu(): void {
-    this.menuAberto = !this.menuAberto;
-  }
-
-  fecharMenu(): void {
-    this.menuAberto = false;
-  }
 
   fazerLogin(event: SubmitEvent): void {
     event.preventDefault();

@@ -1,49 +1,3 @@
-<div class="ecomapa-container">
-  <header class="navbar">
-    <div class="navbar-left">
-      <button
-        type="button"
-        class="menu-toggle-btn"
-        aria-label="Abrir menu"
-        [attr.aria-expanded]="menuAberto"
-        (click)="alternarMenu()"
-      >
-        ☰
-      </button>
-
-      <div class="logo">
-        <span class="logo-icon">🌱</span>
-        <span class="logo-text">EcoMapa</span>
-      </div>
-    </div>
-
-    <div class="navbar-right">
-      <nav class="menu" aria-label="Navegação principal">
-        <a *ngFor="let item of menuCabecalho" [routerLink]="item.link">
-          {{ item.rotulo }}
-        </a>
-      </nav>
-    </div>
-
-
-    <nav class="sidebar-nav" [class.ativo]="menuAberto">
-      <ul>
-        <li *ngFor="let item of menuItens">
-          <a [routerLink]="item.link" (click)="fecharMenu()">
-            {{ item.rotulo }}
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <div
-      class="menu-overlay"
-      [class.ativo]="menuAberto"
-      (click)="fecharMenu()"
-    ></div>
-  </header>
-</div>
-
 <main class="login-main">
   <section class="login-container" aria-labelledby="login-title">
     <div class="login-form-container">
@@ -98,7 +52,7 @@
           <span>
             Li e concordo com os 
             <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">Termos de Uso</a> e 
-            <a >Política de Privacidade (LGPD)</a>
+            <a>Política de Privacidade (LGPD)</a>
           </span>
         </label>
 
