@@ -3,10 +3,53 @@
   min-height: 100vh;
 }
 
+.ecomapa-container {
+  min-height: auto;
+  background: #f8f2d7;
+  color: #556b2f;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 6%;
+  background: #fff;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.menu {
+  display: flex;
+  gap: 22px;
+}
+
+.menu a {
+  color: #556b2f;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
 .login-main {
   display: grid;
   place-items: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 65px);
   padding: 32px 20px;
   background: #f8f2d7;
 }

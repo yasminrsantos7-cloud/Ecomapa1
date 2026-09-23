@@ -52,7 +52,7 @@
       <p class="login-subtitle">Junte-se a nós e comece a pontuar!</p>
 
       <form class="login-form" (submit)="cadastrarUsuario($event)">
-        <!-- Nome Completo -->
+     
         <div class="form-field">
           <label for="nome">Nome Completo</label>
           <div class="input-icon-wrapper">
@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <!-- E-mail -->
+     
         <div class="form-field">
           <label for="email">E-mail</label>
           <div class="input-icon-wrapper">
@@ -85,7 +85,7 @@
           </div>
         </div>
 
-        <!-- Senha -->
+
         <div class="form-field">
           <label for="senha">Senha</label>
           <div class="input-icon-wrapper">
@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <!-- Confirmar Senha -->
+     
         <div class="form-field">
           <label for="confirmarSenha">Confirmar Senha</label>
           <div class="input-icon-wrapper">
@@ -119,7 +119,7 @@
           </div>
         </div>
 
-        <!-- Checkbox LGPD -->
+      
         <label class="lgpd-container" for="aceitouTermos">
           <input 
             type="checkbox" 
@@ -135,7 +135,7 @@
           </span>
         </label>
 
-        <!-- Mensagens de Alerta -->
+       
         @if (mensagemErro) {
           <p class="login-error" role="alert">{{ mensagemErro }}</p>
         }
@@ -143,12 +143,11 @@
           <p class="login-success" role="status">{{ mensagemSucesso }}</p>
         }
 
-        <!-- Botão Cadastrar -->
-        <button type="submit" class="btn-submit" [disabled]="carregando || !aceitouTermos">
+  >        <button type="submit" class="btn-submit" [disabled]="carregando || !aceitouTermos">
           {{ carregando ? 'Cadastrando...' : 'Finalizar Cadastro' }}
         </button>
 
-        <!-- Retorno ao Login -->
+        
         <div class="signup-prompt">
           <p>Já possui uma conta?</p>
           <a routerLink="/login" class="btn-signup">Fazer Login</a>
