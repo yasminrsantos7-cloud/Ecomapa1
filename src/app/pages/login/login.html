@@ -1,0 +1,120 @@
+<div class="ecomapa-container">
+  <header class="navbar">
+    <div class="navbar-left">
+      <button
+        type="button"
+        class="menu-toggle-btn"
+        aria-label="Abrir menu"
+        [attr.aria-expanded]="menuAberto"
+        (click)="alternarMenu()"
+      >
+        ☰
+      </button>
+
+      <div class="logo">
+        <span class="logo-icon">🌱</span>
+        <span class="logo-text">EcoMapa</span>
+      </div>
+    </div>
+
+    <div class="navbar-right">
+      <nav class="menu" aria-label="Navegação principal">
+        <a *ngFor="let item of menuCabecalho" [routerLink]="item.link">
+          {{ item.rotulo }}
+        </a>
+      </nav>
+    </div>
+
+
+    <nav class="sidebar-nav" [class.ativo]="menuAberto">
+      <ul>
+        <li *ngFor="let item of menuItens">
+          <a [routerLink]="item.link" (click)="fecharMenu()">
+            {{ item.rotulo }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      class="menu-overlay"
+      [class.ativo]="menuAberto"
+      (click)="fecharMenu()"
+    ></div>
+  </header>
+</div>
+
+<main class="login-main">
+  <section class="login-container" aria-labelledby="login-title">
+    <div class="login-form-container">
+      <div class="brand-logo" aria-hidden="true">🌱</div>
+      <span class="brand-name">EcoMapa</span>
+
+      <h1 id="login-title">Boas-vindas</h1>
+      <p class="login-subtitle">Entre para acompanhar suas conquistas.</p>
+
+      <form class="login-form" (submit)="fazerLogin($event)">
+        <div class="form-field">
+          <label for="email">E-mail</label>
+          <div class="input-icon-wrapper">
+            <span class="icon" aria-hidden="true">✉️</span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Digite seu e-mail"
+              [(ngModel)]="email"
+              autocomplete="email"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Senha</label>
+          <div class="input-icon-wrapper">
+            <span class="icon" aria-hidden="true">🔒</span>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Digite sua senha"
+              [(ngModel)]="senha"
+              minlength="6"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+        </div>
+
+        <label class="lgpd-container" for="aceitouTermos">
+          <input 
+            type="checkbox" 
+            id="aceitouTermos" 
+            name="aceitouTermos" 
+            [(ngModel)]="aceitouTermos"
+            required
+          >
+          <span>
+            Li e concordo com os 
+            <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">Termos de Uso</a> e 
+            <a >Política de Privacidade (LGPD)</a>
+          </span>
+        </label>
+
+        @if (mensagemErro) {
+          <p class="login-error" role="alert">{{ mensagemErro }}</p>
+        }
+
+        <button type="submit" class="btn-submit" [disabled]="carregando || !aceitouTermos">
+          {{ carregando ? 'Entrando...' : 'Entrar' }}
+        </button>
+
+        <div class="signup-prompt">
+          <p>Ainda não tem uma conta?</p>
+          <a routerLink="/cadastro" class="btn-signup">Criar novo cadastro</a>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>

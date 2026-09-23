@@ -1,0 +1,117 @@
+<div class="ecomapa-container">
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🌱</span>
+      <span class="logo-text">EcoMapa</span>
+    </div>
+
+    <nav class="menu" aria-label="Navegação principal">
+      <a *ngFor="let item of menuCabecalho" [routerLink]="item.link">
+        {{ item.rotulo }}
+      </a>
+    </nav>
+  </header>
+
+  <header class="header">
+    <button
+      type="button"
+      class="menu-toggle-btn"
+      aria-label="Abrir menu"
+      [attr.aria-expanded]="menuAberto"
+      (click)="alternarMenu()"
+    >
+      ☰
+    </button>
+
+    <nav class="sidebar-nav" [class.ativo]="menuAberto">
+      <ul>
+        <li *ngFor="let item of menuItens">
+          <a [routerLink]="item.link" (click)="fecharMenu()">
+            {{ item.rotulo }}
+          </a>
+        </li>
+        <li><a routerLink="/conquistas" (click)="fecharMenu()">Conquistas</a></li>
+      </ul>
+    </nav>
+
+    <div
+      class="menu-overlay"
+      [class.ativo]="menuAberto"
+      (click)="fecharMenu()"
+    ></div>
+  </header>
+
+  <main class="guia-container">
+    <section class="atalhos-section">
+      <h1 class="secao-label">Selecione o tipo de resíduo:</h1>
+      <div class="atalhos-grid">
+        @for (cat of categorias(); track cat.id) {
+          <button
+            class="card-atalho"
+            [class.ativo]="cat.id === categoriaSelecionadaId()"
+            (click)="selecionarCategoria(cat.id)"
+            type="button"
+          >
+            <span class="icone" [style.background-color]="cat.corFundo">{{ cat.icone }}</span>
+            <span class="nome">{{ cat.nome }}</span>
+          </button>
+        }
+      </div>
+    </section>
+
+    <section class="passo-a-passo-section">
+      <div class="header-secao">
+        <h2>Como descartar?</h2>
+        <p>Siga o passo a passo para descartar corretamente.</p>
+      </div>
+
+      <div class="item-selecionado-badge">
+        <span>Exemplo de descarte: <strong>{{ guiaAtual().nomeItem }}</strong></span>
+      </div>
+
+      <div class="conteudo-fluxo">
+        <div class="ilustracao-box">
+          <div class="mascote-avatar">
+            <span class="emoji-mascote">{{ guiaAtual().iconeItem }}</span>
+          </div>
+        </div>
+
+        <div class="timeline-etapas">
+          @for (etapa of guiaAtual().etapas; track etapa.numero) {
+            <div class="etapa-item">
+              <div class="etapa-info">
+                <h3>{{ etapa.titulo }}</h3>
+                <p>{{ etapa.descricao }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="curiosidade-section">
+      <div class="card-curiosidade">
+        <div class="curiosidade-conteudo">
+          <h2>{{ guiaAtual().curiosidade.titulo }}</h2>
+          <p>{{ guiaAtual().curiosidade.texto }}</p>
+          <button class="btn-cta" type="button" (click)="navegarParaMapa()">
+            Encontrar ponto para este item
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav-mobile" aria-label="Navegação rápida">
+    <a class="nav-item ativo" routerLink="/guia">
+      <span class="nav-label">Guia</span>
+    </a>
+    <a class="nav-item" routerLink="/mapa">
+      <span class="nav-label">Mapa</span>
+    </a>
+    <a class="nav-item" routerLink="/conquistas">
+      <span class="nav-label">Conquistas</span>
+    </a>
+  </nav>
+</div>
+

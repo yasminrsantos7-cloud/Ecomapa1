@@ -1,0 +1,513 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.ecomapa-container {
+  min-height: 100vh;
+  background: #f8f2d7;
+  color: #556b2f;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 6%;
+  background: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 20px;
+  color: #2f6b46;
+}
+
+.menu {
+  display: flex;
+  gap: 22px;
+}
+
+.menu a {
+  color: #556b2f;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.menu-toggle-btn {
+  position: fixed;
+  top: 24px;
+  left: 28px;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #556b2f;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  z-index: 1001;
+  width: 300px;
+  height: 100vh;
+  padding-top: 80px;
+  overflow-y: auto;
+  background-color: #fff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.12);
+  transition: left 0.3s ease-in-out;
+}
+
+.sidebar-nav.ativo {
+  left: 0;
+}
+
+.sidebar-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  padding: 16px 32px;
+  color: #556b2f;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.sidebar-nav a:hover {
+  background-color: #eef8f1;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 1000;
+}
+
+.menu-overlay.ativo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mapa-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 5.5rem;
+  color: #2c3e50;
+}
+
+.header-mapa {
+  margin-bottom: 1.5rem;
+}
+
+.header-mapa h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 2.8vw, 2.8rem);
+  color: #2c3e50;
+}
+
+.header-mapa p {
+  margin: 0 0 1.25rem;
+  color: #64748b;
+}
+
+.busca-box {
+  position: relative;
+  max-width: 620px;
+  margin-bottom: 1rem;
+}
+
+.busca-box input {
+  width: 100%;
+  padding: 0.9rem 3.1rem 0.9rem 2.9rem;
+  border: 1px solid #dfe8e1;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  outline: none;
+}
+
+.busca-box input:focus {
+  border-color: #72d3a1;
+}
+
+.icone-busca {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1.1rem;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.icone-busca:hover {
+  background: #e8f1ea;
+  color: #2f6b46;
+}
+
+.chips-filtros {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.chip-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid #dfe8e1;
+  border-radius: 999px;
+  background: #fff;
+  color: #2c3e50;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.chip-item.ativo {
+  background: #72d3a1;
+  border-color: #72d3a1;
+  color: #fff;
+}
+
+.conteudo-mapa {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1.5rem;
+}
+
+.lista-pontos {
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+
+.resultado-count {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.cards-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-ponto {
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-ponto:hover,
+.card-ponto.selecionado {
+  border-color: #72d3a1;
+  background: #f4f9f5;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.distancia {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #2f6b46;
+}
+
+.endereco {
+  margin: 0.45rem 0 0.7rem;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.status-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.status-badge {
+  color: #d13d3d;
+  font-weight: 700;
+}
+
+.status-badge.aberto {
+  color: #2e7d32;
+}
+
+.avaliacao {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.tags-residuos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.8rem;
+}
+
+.tag-item {
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  background: #e8f1ea;
+  color: #2f6b46;
+  font-size: 0.72rem;
+  text-transform: capitalize;
+}
+
+.btn-rota,
+.btn-rota-lg {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: #72d3a1;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-rota {
+  padding: 0.65rem 0.8rem;
+}
+
+.visualizacao-mapa {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #eaf4ed, #dcefe3);
+  overflow: hidden;
+}
+
+.mapa-mock {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.pin-mapa {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pin-mapa:nth-child(1) { top: 28%; left: 22%; }
+.pin-mapa:nth-child(2) { top: 55%; left: 55%; }
+.pin-mapa:nth-child(3) { top: 70%; left: 33%; }
+.pin-mapa:nth-child(4) { top: 35%; left: 40%; }
+
+.pin-mapa.pin-ativo {
+  background: #72d3a1;
+  color: #fff;
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+.pin-usuario {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+}
+
+.pin-usuario .dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid #fff;
+}
+
+.pin-usuario .pulso {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.25);
+  animation: pulsoAnim 1.5s infinite;
+}
+
+.painel-detalhes {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 1.1rem 1rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.btn-fechar {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #2c3e50;
+}
+
+.painel-detalhes h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.08rem;
+}
+
+.painel-detalhes p {
+  margin: 0.3rem 0;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.btn-rota-lg {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.bottom-nav-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nav-item.ativo {
+  color: #2f6b46;
+}
+
+.nav-icone {
+  font-size: 1.2rem;
+}
+
+.nav-label {
+  font-size: 0.68rem;
+}
+
+@keyframes pulsoAnim {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .mapa-container {
+    padding-bottom: 2rem;
+  }
+
+  .conteudo-mapa {
+    display: grid;
+    grid-template-columns: 380px minmax(0, 1fr);
+    min-height: 480px;
+  }
+
+  .visualizacao-mapa {
+    height: 100%;
+    min-height: 480px;
+  }
+
+  .bottom-nav-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+

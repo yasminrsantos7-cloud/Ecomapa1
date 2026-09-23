@@ -1,0 +1,167 @@
+<div class="ecomapa-container">
+<header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🌱</span>
+      <span class="logo-text">EcoMapa</span>
+    </div>
+  </header>
+
+
+  <header class="header">
+    <button
+      type="button"
+      class="menu-toggle-btn"
+      aria-label="Abrir menu"
+      [attr.aria-expanded]="menuAberto"
+      (click)="alternarMenu()"
+    >
+      ☰
+    </button>
+
+    <nav class="sidebar-nav" [class.ativo]="menuAberto">
+      <ul>
+        <li *ngFor="let item of menuItens">
+          <a [routerLink]="item.link" (click)="fecharMenu()">
+            {{ item.rotulo }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      class="menu-overlay"
+      [class.ativo]="menuAberto"
+      (click)="fecharMenu()"
+    ></div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>Sua Jornada Ecológica</h1>
+      <p>Recicle resíduos, acumule pontos e faça sua horta virtual evoluir!</p>
+    </section>
+
+   
+    <section class="action-card">
+      <h3> Registrar Novo Descarte</h3>
+      <div class="action-form">
+        <div class="form-group">
+          <label>Resíduo Descartado:</label>
+          <select [(ngModel)]="materialSelecionado" class="input-select">
+            <option value="Plástico ">Plástico [+100 pts]</option>
+            <option value="Papel/Papelão ">Papel/Papelão [+80 pts]</option>
+            <option value="Vidro ">Vidro [+150 pts]</option>
+            <option value="Metal ">Metal [+120 pts]</option>
+            <option value="Eletrônicos">Eletrônicos [+200 pts]</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Ponto de Coleta:</label>
+          <select [(ngModel)]="pontoSelecionado" class="input-select">
+            <option *ngFor="let ponto of pontosColeta" [value]="ponto.nome + ' - ' + ponto.endereco">
+              {{ ponto.nome }} — {{ ponto.endereco }}
+            </option>
+          </select>
+        </div>
+
+        <button type="button" class="btn-reciclar" (click)="registrarDescarte()">
+          Confirmar Descarte
+        </button>
+      </div>
+    </section>
+
+    <section class="profile-dashboard">
+      <div class="profile-card">
+        <div class="user-info">
+          <h2>{{ perfil.nome }}</h2>
+          <span class="level-badge">Nível {{ perfil.nivel }}</span>
+        </div>
+
+        <div class="xp-container">
+          <div class="xp-labels">
+            <span>Experiência (XP)</span>
+            <span>{{ perfil.xpAtual }} / {{ perfil.xpProximoNivel }} XP</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="calcularPorcentagemXp()"></div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-value">{{ perfil.pontosAcumulados }}</span>
+            <span class="stat-label">Pontos Acumulados</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value">{{ perfil.totalDescartes }}</span>
+            <span class="stat-label">Descartes Realizados</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="garden-card">
+        <h3>Sua Hortinha Virtual</h3>
+        <div class="garden-stage">
+          <span class="garden-icon">{{ perfil.iconeHorta }}</span>
+          <p class="garden-status">{{ perfil.estagioHorta }}</p>
+        </div>
+        <p class="garden-desc">
+          Continue realizando descartes para fazer sua semente crescer e se transformar em uma grande árvore!
+        </p>
+      </div>
+    </section>
+
+   
+    <section class="badges-section">
+      <h2>Medalhas & Conquistas</h2>
+      <div class="badges-grid">
+        <div 
+          *ngFor="let badge of badges" 
+          class="badge-card" 
+          [class.locked]="!badge.desbloqueado"
+        >
+          <h4>{{ badge.titulo }}</h4>
+          <p>{{ badge.descricao }}</p>
+          
+          <div *ngIf="badge.desbloqueado" class="badge-status unlocked">
+            Desbloqueado em {{ badge.dataDesbloqueio }}
+          </div>
+          <div *ngIf="!badge.desbloqueado" class="badge-status locked-text">
+            Bloqueado ({{ badge.progresso }}%)
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="history-section">
+      <h2>Histórico Recente</h2>
+      
+      <div *ngIf="historico.length === 0" class="empty-history">
+        <p>Nenhum descarte registrado ainda. Faça seu primeiro descarte acima para começar!</p>
+      </div>
+
+      <div *ngIf="historico.length > 0" class="history-list">
+        <div *ngFor="let item of historico" class="history-card">
+          <div class="history-info">
+            <strong>{{ item.material }}</strong>
+            <span>{{ item.pontoColeta }}</span>
+            <small>{{ item.data }}</small>
+          </div>
+          <div class="history-points">
+            +{{ item.pontosGanhos }} pts
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+    <div class="reset-container">
+      <button type="button" class="btn-reset" (click)="resetarProgresso()">
+        Resetar Meu Progresso (Zerar)
+      </button>
+    </div>
+  </main>
+</div>

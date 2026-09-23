@@ -1,0 +1,183 @@
+<div class="ecomapa-container">
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🌱</span>
+      <span class="logo-text">EcoMapa</span>
+    </div>
+
+    <nav class="menu">
+      <a *ngFor="let item of menuCabecalho" [routerLink]="item.link">
+        {{ item.rotulo }}
+      </a>
+    </nav>
+  </header>
+
+  <header class="header">
+    <button
+      type="button"
+      class="menu-toggle-btn"
+      aria-label="Abrir menu"
+      [attr.aria-expanded]="menuAberto"
+      (click)="alternarMenu()"
+    >
+      ☰
+    </button>
+
+    <nav class="sidebar-nav" [class.ativo]="menuAberto">
+      <ul>
+        <li *ngFor="let item of menuItens">
+          <a [routerLink]="item.link" (click)="fecharMenu()">
+            {{ item.rotulo }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      class="menu-overlay"
+      [class.ativo]="menuAberto"
+      (click)="fecharMenu()"
+    ></div>
+  </header>
+
+  <div class="mapa-container">
+    <header class="header-mapa">
+      <h1>Pontos de Coleta</h1>
+      <p>Encontre o local mais próximo para descartar seus resíduos corretamente.</p>
+
+      <div class="busca-box">
+        <input
+          type="text"
+          placeholder="Buscar por bairro, endereço ou nome do ecoponto..."
+          [value]="termoBusca()"
+          (input)="atualizarBusca($event)"
+          (keydown.enter)="pesquisarNoGoogleMaps()"
+        />
+        <button
+          type="button"
+          class="icone-busca"
+          aria-label="Pesquisar endereço no Google Maps"
+          title="Pesquisar no Google Maps"
+          (click)="pesquisarNoGoogleMaps()"
+        >
+          🔍
+        </button>
+      </div>
+
+      <div class="chips-filtros">
+        @for (cat of categorias(); track cat.id) {
+          <button
+            type="button"
+            class="chip-item"
+            [class.ativo]="cat.id === categoriaFiltro()"
+            (click)="filtrarPorCategoria(cat.id)"
+          >
+            <span class="chip-icone">{{ cat.icone }}</span>
+            <span class="chip-nome">{{ cat.nome }}</span>
+          </button>
+        }
+      </div>
+    </header>
+
+    <main class="conteudo-mapa">
+      <section class="lista-pontos">
+        <div class="resultado-count">
+          <span>{{ pontosFiltrados().length }} pontos encontrados</span>
+        </div>
+
+        <div class="cards-scroll">
+          @for (ponto of pontosFiltrados(); track ponto.id) {
+            <article
+              class="card-ponto"
+              [class.selecionado]="ponto.id === pontoSelecionado()?.id"
+              (click)="selecionarPonto(ponto)"
+            >
+              <div class="card-header">
+                <h3>{{ ponto.nome }}</h3>
+                <span class="distancia">📍 {{ ponto.distanciaKm }} km</span>
+              </div>
+
+              <p class="endereco">{{ ponto.endereco }}</p>
+
+              <div class="status-info">
+                <span class="status-badge" [class.aberto]="ponto.status.includes('Aberto')">
+                  ● {{ ponto.status }}
+                </span>
+                <span class="avaliacao">★ {{ ponto.avaliacao }}</span>
+              </div>
+
+              <div class="tags-residuos">
+                @for (catId of ponto.categoriasAceitas; track catId) {
+                  <span class="tag-item">{{ catId }}</span>
+                }
+              </div>
+
+              <button
+                type="button"
+                class="btn-rota"
+                (click)="tracarRota(ponto); $event.stopPropagation()"
+              >
+                 Como chegar
+              </button>
+            </article>
+          }
+        </div>
+      </section>
+
+      <section class="visualizacao-mapa">
+        <div class="mapa-mock">
+          @for (ponto of pontosFiltrados(); track ponto.id) {
+            <div
+              class="pin-mapa"
+              [class.pin-ativo]="ponto.id === pontoSelecionado()?.id"
+              (click)="selecionarPonto(ponto)"
+            >
+              <span class="pin-icone">♻️</span>
+              <span class="pin-label">{{ ponto.nome }}</span>
+            </div>
+          }
+
+          <div class="pin-usuario" title="Sua Localização">
+            <span class="pulso"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        @if (pontoSelecionado(); as selecionado) {
+          <div class="painel-detalhes">
+            <button class="btn-fechar" type="button" (click)="pontoSelecionado.set(null)">✕</button>
+            <h2>{{ selecionado.nome }}</h2>
+            <p class="detalhe-endereco">📍 {{ selecionado.endereco }}</p>
+            <p class="detalhe-horario">🕒 {{ selecionado.horario }}</p>
+            @if (selecionado.telefone) {
+              <p class="detalhe-tel">📞 {{ selecionado.telefone }}</p>
+            }
+            <button type="button" class="btn-rota-lg" (click)="tracarRota(selecionado)">
+              Traçar rota no Google Maps ➔
+            </button>
+          </div>
+        }
+      </section>
+    </main>
+
+    <nav class="bottom-nav-mobile" aria-label="Navegação rápida">
+      <button class="nav-item" type="button" (click)="navegarPara('inicio')">
+        <span class="nav-icone">🏠</span>
+        <span class="nav-label">Início</span>
+      </button>
+      <button class="nav-item ativo" type="button" (click)="navegarPara('mapa')">
+        <span class="nav-icone">🗺️</span>
+        <span class="nav-label">Mapa</span>
+      </button>
+      <button class="nav-item" type="button" (click)="navegarPara('guia')">
+        <span class="nav-icone">📘</span>
+        <span class="nav-label">Guia</span>
+      </button>
+      <button class="nav-item" type="button" (click)="navegarPara('conquistas')">
+        <span class="nav-icone">🏆</span>
+        <span class="nav-label">Conquistas</span>
+      </button>
+    </nav>
+  </div>
+</div>
+

@@ -1,0 +1,159 @@
+<div class="ecomapa-container">
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🌱</span>
+      <span class="logo-text">EcoMapa</span>
+    </div>
+
+    <nav class="menu" aria-label="Navegação principal">
+      <a *ngFor="let item of menuCabecalho" [routerLink]="item.link">
+        {{ item.rotulo }}
+      </a>
+    </nav>
+  </header>
+
+  <header class="header">
+    <button
+      type="button"
+      class="menu-toggle-btn"
+      aria-label="Abrir menu"
+      [attr.aria-expanded]="menuAberto"
+      (click)="alternarMenu()"
+    >
+      ☰
+    </button>
+
+    <nav class="sidebar-nav" [class.ativo]="menuAberto">
+      <ul>
+        <li *ngFor="let item of menuItens">
+          <a [routerLink]="item.link" (click)="fecharMenu()">
+            {{ item.rotulo }}
+          </a>
+        </li>
+        <li><a routerLink="/conquistas" (click)="fecharMenu()">Conquistas</a></li>
+      </ul>
+    </nav>
+
+    <div
+      class="menu-overlay"
+      [class.ativo]="menuAberto"
+      (click)="fecharMenu()"
+    ></div>
+  </header>
+</div>
+
+<main class="login-main">
+  <section class="login-container" aria-labelledby="cadastro-title">
+    <div class="login-form-container">
+      <div class="brand-logo" aria-hidden="true">🌱</div>
+      <span class="brand-name">EcoMapa</span>
+
+      <h1 id="cadastro-title">Criar Conta</h1>
+      <p class="login-subtitle">Junte-se a nós e comece a pontuar!</p>
+
+      <form class="login-form" (submit)="cadastrarUsuario($event)">
+        <!-- Nome Completo -->
+        <div class="form-field">
+          <label for="nome">Nome Completo</label>
+          <div class="input-icon-wrapper">
+            <span class="icon" aria-hidden="true">👤</span>
+            <input
+              id="nome"
+              name="nome"
+              type="text"
+              placeholder="Digite seu nome completo"
+              [(ngModel)]="nome"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- E-mail -->
+        <div class="form-field">
+          <label for="email">E-mail</label>
+          <div class="input-icon-wrapper">
+            <span class="icon" aria-hidden="true">✉️</span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Digite seu e-mail"
+              [(ngModel)]="email"
+              autocomplete="email"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Senha -->
+        <div class="form-field">
+          <label for="senha">Senha</label>
+          <div class="input-icon-wrapper">
+            <span class="icon" aria-hidden="true">🔒</span>
+            <input
+              id="senha"
+              name="senha"
+              type="password"
+              placeholder="Senha (mínimo 6 dígitos)"
+              [(ngModel)]="senha"
+              minlength="6"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Confirmar Senha -->
+        <div class="form-field">
+          <label for="confirmarSenha">Confirmar Senha</label>
+          <div class="input-icon-wrapper">
+            <span class="icon" aria-hidden="true">🔑</span>
+            <input
+              id="confirmarSenha"
+              name="confirmarSenha"
+              type="password"
+              placeholder="Repita a senha"
+              [(ngModel)]="confirmarSenha"
+              minlength="6"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Checkbox LGPD -->
+        <label class="lgpd-container" for="aceitouTermos">
+          <input 
+            type="checkbox" 
+            id="aceitouTermos" 
+            name="aceitouTermos" 
+            [(ngModel)]="aceitouTermos"
+            required
+          >
+          <span>
+            Li e concordo com os 
+            <a routerLink="/termos" target="_blank">Termos de Uso</a> e 
+            <a routerLink="/privacidade" target="_blank">Política de Privacidade (LGPD)</a>
+          </span>
+        </label>
+
+        <!-- Mensagens de Alerta -->
+        @if (mensagemErro) {
+          <p class="login-error" role="alert">{{ mensagemErro }}</p>
+        }
+        @if (mensagemSucesso) {
+          <p class="login-success" role="status">{{ mensagemSucesso }}</p>
+        }
+
+        <!-- Botão Cadastrar -->
+        <button type="submit" class="btn-submit" [disabled]="carregando || !aceitouTermos">
+          {{ carregando ? 'Cadastrando...' : 'Finalizar Cadastro' }}
+        </button>
+
+        <!-- Retorno ao Login -->
+        <div class="signup-prompt">
+          <p>Já possui uma conta?</p>
+          <a routerLink="/login" class="btn-signup">Fazer Login</a>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>

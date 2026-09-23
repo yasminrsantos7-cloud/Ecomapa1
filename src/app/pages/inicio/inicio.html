@@ -1,0 +1,151 @@
+<div class="ecomapa-container">
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-text">EcoMapa</span>
+    </div>
+
+    <div class="navbar-right">
+      <nav class="menu">
+        <a *ngFor="let item of menuCabecalho" [routerLink]="item.link">
+          {{ item.rotulo }}
+        </a>
+      </nav>
+
+      <button type="button" class="btn-sair" (click)="sair()" title="Sair do sistema">
+        Sair
+      </button>
+    </div>
+  </header>
+
+  <header class="header">
+    <button
+      type="button"
+      class="menu-toggle-btn"
+      aria-label="Abrir menu"
+      [attr.aria-expanded]="menuAberto"
+      (click)="alternarMenu()"
+    >
+      ☰
+    </button>
+
+    <nav class="sidebar-nav" [class.ativo]="menuAberto">
+      <ul>
+        <li *ngFor="let item of menuItens">
+          <a [routerLink]="item.link" (click)="fecharMenu()">
+            {{ item.rotulo }}
+          </a>
+        </li>
+        <li><a routerLink="/conquistas" (click)="fecharMenu()">Conquistas</a></li>
+      </ul>
+    </nav>
+
+    <div
+      class="menu-overlay"
+      [class.ativo]="menuAberto"
+      (click)="fecharMenu()"
+    ></div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>Pequenas atitudes,<br>um planeta mais feliz!</h1>
+      <p>Descubra onde descartar corretamente cada tipo de resíduo.</p>
+
+      <div class="search-bar">
+        <input
+          type="text"
+          [(ngModel)]="termoBusca"
+          placeholder="O que você quer descartar?"
+          (keyup.enter)="buscarResiduo()"
+        >
+
+        <button *ngIf="modoDashboard" type="button" class="btn-clear" (click)="limparBusca()" title="Limpar busca">
+          Limpar
+        </button>
+
+        <button type="button" (click)="buscarResiduo()">Buscar</button>
+      </div>
+    </section>
+
+    <div class="dashboard-header" *ngIf="modoDashboard">
+      <div class="dashboard-title">
+        <span>Análise de Impacto Comparativo: <strong>"{{ itemPesquisadoNome }}"</strong></span>
+      </div>
+      <button class="btn-reset-dashboard" (click)="limparBusca()">
+        Voltar às Categorias
+      </button>
+    </div>
+
+    <section
+      class="categories-carousel"
+      aria-label="Carrossel do Dashboard"
+      (mouseenter)="pausarCarrossel()"
+      (mouseleave)="retomarCarrossel()"
+    >
+      <button
+        type="button"
+        class="carousel-control"
+        aria-label="Anterior"
+        (click)="categoriaAnterior()"
+      >
+        &#8249;
+      </button>
+
+      <div class="categories-grid" *ngIf="!modoDashboard">
+        <button
+          type="button"
+          class="category-card"
+          *ngFor="let categoria of categoriasVisiveis"
+          (click)="selecionarCategoria(categoria)"
+        >
+          <span
+            class="icon-box"
+            [style.backgroundColor]="categoria.corFundo"
+          >
+            {{ categoria.icone }}
+          </span>
+          <span>{{ categoria.nome }}</span>
+        </button>
+      </div>
+
+      
+      <div class="categories-grid" *ngIf="modoDashboard">
+        <div 
+          class="dashboard-card" 
+          *ngFor="let metrica of metricasVisiveis"
+          [attr.data-status]="metrica.status"
+        >
+          <div class="card-header">
+            <span class="metric-icon">{{ metrica.icone }}</span>
+            <span class="metric-title">{{ metrica.titulo }}</span>
+          </div>
+
+          <div class="metric-comparison">
+            <div class="value-box current">
+              <span class="value-label">Item Pesquisado</span>
+              <span class="value-main">{{ metrica.valorPesquisado }}</span>
+            </div>
+
+            <div class="vs-badge">VS</div>
+
+            <div class="value-box benchmark">
+              <span class="value-label">{{ metrica.rotuloComparacao }}</span>
+              <span class="value-sub">{{ metrica.valorComparacao }}</span>
+            </div>
+          </div>
+
+          <p class="metric-dica">{{ metrica.dica }}</p>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="carousel-control"
+        aria-label="Próximo"
+        (click)="proximaCategoria()"
+      >
+        &#8250;
+      </button>
+    </section>
+  </main>
+</div>
