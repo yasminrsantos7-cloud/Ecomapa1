@@ -45,8 +45,7 @@ export class Conquistas implements OnInit {
     { rotulo: 'Início', link: '/inicio' },
     { rotulo: 'Guia', link: '/guia' },
     { rotulo: 'Mapa', link: '/mapa' },
-    { rotulo: 'Conquistas', link: '/conquistas' },
-    { rotulo: 'Login', link: '/login' }
+    { rotulo: 'Conquistas', link: '/conquistas' }, 
   ];
 
   perfil: PerfilUsuario = {

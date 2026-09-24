@@ -19,7 +19,6 @@ export class Login {
   carregando = false;
   mensagemErro = '';
 
-
   constructor(private router: Router) {}
 
   fazerLogin(event: SubmitEvent): void {
@@ -41,6 +40,13 @@ export class Login {
       this.mensagemErro = 'A senha deve conter no mínimo 6 dígitos.';
       return;
     }
+
+    console.log('Dados do formulário de login:', {
+      email: this.email.trim(),
+      senha: this.senha,
+      aceitouTermos: this.aceitouTermos,
+      dataHora: new Date().toISOString()
+    });
 
     this.carregando = true;
 

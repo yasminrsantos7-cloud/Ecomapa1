@@ -42,7 +42,6 @@ export class Guia {
     { id: 'papel', nome: 'Papel', icone: '📄', corFundo: '#fef3c7' },
     { id: 'vidro', nome: 'Vidro', icone: '🍾', corFundo: '#dcfce7' },
     { id: 'metal', nome: 'Metal', icone: '🥫', corFundo: '#e5e7eb' },
-    { id: 'organico', nome: 'Orgânico', icone: '🍎', corFundo: '#fee2e2' },
     { id: 'eletronico', nome: 'Eletrônico', icone: '🔋', corFundo: '#ede9fe' }
   ]);
 
@@ -131,7 +130,6 @@ export class Guia {
     { rotulo: 'Início', link: '/inicio' },
     { rotulo: 'Guia', link: '/guia' },
     { rotulo: 'Mapa', link: '/mapa' },
-    { rotulo: 'Login', link: '/login' }
   ];
 
   menuCabecalho: { rotulo: string; link: string }[] = [];

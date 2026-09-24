@@ -9,7 +9,9 @@
   color: #556b2f;
 }
 
+
 .navbar {
+  position: relative; 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,6 +20,9 @@
 }
 
 .logo {
+  position: absolute; 
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -25,11 +30,11 @@
   font-size: 20px;
 }
 
-
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 24px;
+  margin-left: auto;
 }
 
 .btn-sair {
@@ -39,7 +44,7 @@
   padding: 8px 16px;
   border: 1px solid #dcd4b8;
   border-radius: 8px;
-  background-color: #f8f2d7; /* Fundo Bege */
+  background-color: #f8f2d7;
   color: #556b2f;           
   font-size: 14px;
   font-weight: 600;
@@ -63,6 +68,7 @@
   font-weight: 600;
   text-decoration: none;
 }
+
 
 .main-content {
   max-width: 1100px;
@@ -243,8 +249,6 @@
   pointer-events: auto;
 }
 
-
-
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -261,7 +265,6 @@
   font-size: 16px;
   color: #556b2f;
 }
-
 
 .btn-reset-dashboard {
   display: inline-flex;
@@ -293,7 +296,6 @@
   box-shadow: 0 2px 4px rgba(85, 107, 47, 0.2);
 }
 
-
 .dashboard-card {
   display: flex;
   flex-direction: column;
@@ -310,7 +312,6 @@
   transform: translateY(-3px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
-
 
 .dashboard-card[data-status="bom"] {
   border-left-color: #22c55e;
@@ -392,43 +393,69 @@
   line-height: 1.4;
 }
 
-@media (max-width: 700px) {
-  .navbar {
-    flex-direction: column;
-    gap: 15px;
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 40px 16px;
   }
 
-  .navbar-right {
-    flex-direction: column;
-    gap: 12px;
+  .hero-section h1 {
+    font-size: 32px;
   }
 
-  .menu {
-    flex-wrap: wrap;
-    justify-content: center;
+  .hero-section p {
+    font-size: 15px;
   }
 
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .search-bar {
+    width: 100%;
+    margin: 20px auto;
   }
 
   .categories-carousel {
     gap: 8px;
   }
 
-  .carousel-control {
-    flex-basis: 34px;
-    width: 34px;
-    height: 34px;
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
-  .hero-section h1 {
-    font-size: 30px;
+  .carousel-control {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    font-size: 22px;
   }
 
   .dashboard-header {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+
+  .metric-comparison {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .vs-badge {
+    align-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 26px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-nav {
+    width: 260px;
+    left: -260px;
   }
 }

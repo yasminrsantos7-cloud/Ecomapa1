@@ -9,10 +9,12 @@
   color: #556b2f;
 }
 
+
 .navbar {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; 
   padding: 18px 6%;
   background: #fff;
 }
@@ -24,9 +26,12 @@
   font-weight: 800;
   font-size: 20px;
   color: #2f6b46;
+  text-align: center;
 }
 
 .menu {
+  position: absolute;
+  right: 6%; 
   display: flex;
   gap: 22px;
 }
@@ -112,7 +117,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 1.5rem 1.25rem 5.5rem;
-  color: #2c3e50;
+  color: #2f6b46;
 }
 
 .header-mapa {
@@ -121,13 +126,13 @@
 
 .header-mapa h1 {
   margin: 0 0 0.5rem;
-  font-size: clamp(2rem, 2.8vw, 2.8rem);
-  color: #2c3e50;
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  color: #2f6b46;
 }
 
 .header-mapa p {
   margin: 0 0 1.25rem;
-  color: #64748b;
+  color: #2f6b46;
 }
 
 .busca-box {
@@ -164,7 +169,7 @@
   border-radius: 50%;
   background: transparent;
   font-size: 1.1rem;
-  color: #64748b;
+  color: #2f6b46;
   cursor: pointer;
 }
 
@@ -178,6 +183,7 @@
   gap: 0.5rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
+  scrollbar-width: thin;
 }
 
 .chip-item {
@@ -188,7 +194,7 @@
   border: 1px solid #dfe8e1;
   border-radius: 999px;
   background: #fff;
-  color: #2c3e50;
+  color: #2f6b46;
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
@@ -500,14 +506,38 @@
 }
 
 @media (max-width: 767px) {
-  .navbar {
-    flex-direction: column;
-    gap: 0.75rem;
+  .menu {
+    display: none; 
   }
 
-  .menu {
-    flex-wrap: wrap;
-    justify-content: center;
+  .mapa-container {
+    padding: 1rem 1rem 5rem;
+  }
+
+  .visualizacao-mapa {
+    height: 280px;
+  }
+
+  .painel-detalhes {
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.9rem;
   }
 }
 
+@media (max-width: 480px) {
+  .sidebar-nav {
+    width: 260px;
+    left: -260px;
+  }
+
+  .card-header h3 {
+    font-size: 1rem;
+  }
+
+  .chip-item {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
