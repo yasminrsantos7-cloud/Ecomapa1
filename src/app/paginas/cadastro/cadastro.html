@@ -12,36 +12,7 @@
     </nav>
   </header>
 
-  <header class="header">
-    <button
-      type="button"
-      class="menu-toggle-btn"
-      aria-label="Abrir menu"
-      [attr.aria-expanded]="menuAberto"
-      (click)="alternarMenu()"
-    >
-      ☰
-    </button>
-
-    <nav class="sidebar-nav" [class.ativo]="menuAberto">
-      <ul>
-        <li *ngFor="let item of menuItens">
-          <a [routerLink]="item.link" (click)="fecharMenu()">
-            {{ item.rotulo }}
-          </a>
-        </li>
-        <li><a routerLink="/conquistas" (click)="fecharMenu()">Conquistas</a></li>
-      </ul>
-    </nav>
-
-    <div
-      class="menu-overlay"
-      [class.ativo]="menuAberto"
-      (click)="fecharMenu()"
-    ></div>
-  </header>
-</div>
-
+ 
 <main class="login-main">
   <section class="login-container" aria-labelledby="cadastro-title">
     <div class="login-form-container">

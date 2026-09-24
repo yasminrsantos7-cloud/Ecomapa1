@@ -40,7 +40,6 @@ export class Mapa implements OnInit {
     { rotulo: 'Guia', link: '/guia' },
     { rotulo: 'Mapa', link: '/mapa' },
     { rotulo: 'Conquistas', link: '/conquistas' },
-    { rotulo: 'Login', link: '/login' }
   ];
 
   menuCabecalho: { rotulo: string; link: string }[] = [];

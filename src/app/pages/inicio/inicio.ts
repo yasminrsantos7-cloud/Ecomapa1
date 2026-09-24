@@ -41,7 +41,7 @@ export class Inicio implements OnInit, OnDestroy {
     { rotulo: 'Início', link: '/inicio' },
     { rotulo: 'Guia', link: '/guia' },
     { rotulo: 'Mapa', link: '/mapa' },
-    { rotulo: 'Login', link: '/login' }
+   
   ];
 
   menuCabecalho: { rotulo: string; link: string }[] = [];
